@@ -1,0 +1,304 @@
+:root {
+  --bg-color: #0f2027;
+  --text-color: white;
+  --accent-color: #00f7ff;
+  --hover-color: #00c9ff;
+  --button-text: black;
+  --exit-bg: #ff0055;
+  --status-color: #00f7ff;
+}
+
+body.light-theme {
+  --bg-color: #f0f0f0;
+  --text-color: #111;
+  --accent-color: #007bff;
+  --hover-color: #0056b3;
+  --button-text: white;
+  --exit-bg: #d9534f;
+  --status-color: #007bff;
+}
+
+body {
+  background: var(--bg-color);
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--text-color);
+  text-align: center;
+  padding: 50px;
+  transition: 0.3s ease;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  color: var(--accent-color);
+  text-shadow: 2px 2px #00000055;
+}
+
+.button {
+  background: var(--accent-color);
+  color: var(--button-text);
+  border: none;
+  padding: 12px 25px;
+  margin: 10px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 10px var(--accent-color);
+}
+
+.button:hover {
+  background: var(--hover-color);
+  box-shadow: 0 0 20px var(--accent-color);
+}
+
+#exit {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--exit-bg);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2em;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--exit-bg);
+}
+
+#status {
+  margin-top: 20px;
+  font-size: 1.2em;
+  color: var(--status-color);
+}
+
+/* Upload Zone */
+#dropZone {
+  border: 2px dashed var(--accent-color);
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 20px auto;
+  width: 300px;
+  height: 200px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  font-size: 1.2em;
+  font-weight: 600;
+  box-shadow: 0 0 10px var(--accent-color);
+}
+
+#dropZone::before {
+  content: "📁 Drop PDFs here or click";
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+}
+
+#dropZone:hover {
+  background: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 20px var(--accent-color);
+  transform: scale(1.02);
+}
+
+#dropZone.dragover {
+  background: rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 30px var(--accent-color);
+}
+
+#preview-container {
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--accent-color);
+}
+
+#preview-container h3 {
+  margin-bottom: 10px;
+  color: var(--accent-color);
+}
+
+#reorderList {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#reorderList li {
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  border: 2px dashed var(--accent-color);
+  border-radius: 8px;
+  cursor: grab;
+  font-size: 1em;
+  color: var(--text-color);
+}
+
+#reorderList li.dragging {
+  opacity: 0.5;
+  background: rgba(0, 255, 255, 0.2);
+}
+
+#reorderList li button {
+  float: right;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+#previewList iframe {
+  width: 90%;
+  height: 400px;
+  border: 2px solid var(--accent-color);
+  border-radius: 10px;
+  margin: 15px 0;
+  box-shadow: 0 0 10px var(--accent-color);
+}
+
+/* Sidebar */
+#historyToggle {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--accent-color);
+  color: var(--button-text);
+  padding: 10px 12px;
+  border-radius: 0 10px 10px 0;
+  font-size: 1.3em;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: 0 0 10px var(--accent-color);
+}
+
+#sidebar {
+  position: fixed;
+  left: -260px;
+  top: 0;
+  height: 100%;
+  width: 260px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: left 0.3s ease;
+  box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto;
+  border-right: 2px solid var(--accent-color);
+}
+
+#sidebar.open {
+  left: 0;
+}
+
+#sidebar h3 {
+  margin-bottom: 15px;
+  color: var(--accent-color);
+}
+
+#sidebar select {
+  margin-bottom: 15px;
+  padding: 5px;
+  width: 100%;
+  font-size: 0.95em;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 6px;
+}
+
+.history-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.history-list li {
+  background: rgba(255,255,255,0.05);
+  margin-bottom: 12px;
+  border: 1px dashed var(--accent-color);
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.history-title {
+  cursor: pointer;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menu {
+  position: relative;
+}
+
+.menu button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.menu-options {
+  position: absolute;
+  right: 0;
+  top: 25px;
+  background: var(--bg-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  padding: 5px;
+  display: none;
+  z-index: 999;
+}
+
+.menu-options button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  color: var(--text-color);
+  cursor: pointer;
+  text-align: left;
+}
+
+.menu-options button:hover {
+  background-color: var(--accent-color);
+  color: var(--button-text);
+}
+
+.history-list li button[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: -28px;
+  right: 0;
+  background: var(--accent-color);
+  color: var(--button-text);
+  padding: 4px 8px;
+  font-size: 0.75em;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 0 0 5px var(--accent-color);
+}

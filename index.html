@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MergeMaster Pro</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+
+  <button id="exit" onclick="resetAll()">X</button>
+  <h1>🚀 MergeMaster Pro</h1>
+
+  <button id="themeToggle" class="button">🌙 Dark Mode</button><br/>
+
+  <input type="file" id="pdfFiles" accept=".pdf" multiple hidden />
+  <div id="dropZone" onclick="document.getElementById('pdfFiles').click()"></div>
+
+  <button class="button" onclick="promptPDFName()">Merge PDFs</button>
+
+  <div id="preview-container">
+    <h3>📑 Preview & Reorder PDFs</h3>
+    <ul id="reorderList"></ul>
+    <div id="previewList"></div>
+  </div>
+
+  <div id="status"></div>
+
+  <!-- Sidebar Toggle -->
+  <div id="historyToggle">📂</div>
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <h3>🕘 Merge History</h3>
+    <select id="sortHistory" onchange="renderHistory()">
+      <option value="newest">📅 Newest First</option>
+      <option value="oldest">📆 Oldest First</option>
+    </select>
+    <ul id="mergeHistoryList" class="history-list"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
